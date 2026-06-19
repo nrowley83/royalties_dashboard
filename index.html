@@ -20,7 +20,7 @@
     .tt:hover .tip { display: block; }
 
     /* Nav */
-    .nav { background: #1a2340; padding: 0 20px; display: flex; align-items: center; gap: 24px; height: 44px; }
+    .nav { background: #1a2340; padding: 0 clamp(12px, 2vw, 24px); display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); height: 44px; }
     .nav-brand { color: white; font-size: 15px; font-weight: 500; }
     .nav-links { display: flex; gap: 4px; }
     .nav-link { color: #8b9dc0; font-size: 12px; padding: 4px 10px; cursor: pointer; text-decoration: none; }
@@ -29,15 +29,15 @@
     .nav-avatar { width: 22px; height: 22px; border-radius: 50%; background: #4a5568; }
 
     /* Page header */
-    .page-header { padding: 12px 24px 8px; display: flex; align-items: center; justify-content: space-between; }
-    .page-title { font-size: 18px; font-weight: 500; }
+    .page-header { padding: 12px clamp(12px, 2.5vw, 24px) 8px; display: flex; align-items: center; justify-content: space-between; }
+    .page-title { font-size: clamp(15px, 2vw, 18px); font-weight: 500; }
     .page-subtitle { font-size: 11px; color: #888; margin-top: 2px; }
     .legacy-link { font-size: 10px; color: #888; text-decoration: none; }
     .legacy-link:hover { color: #555; }
 
     /* Dashboard */
-    .dashboard { padding: 0 24px 10px; display: flex; flex-direction: column; gap: 6px; }
-    .dash-row { display: flex; gap: 6px; align-items: stretch; }
+    .dashboard { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; flex-direction: column; gap: 6px; }
+    .dash-row { display: flex; gap: clamp(4px, 0.5vw, 6px); align-items: stretch; flex-wrap: wrap; }
 
     .stat-card {
       background: #f1efe8;
@@ -63,7 +63,7 @@
     .pct-neg { font-size: 13px; font-weight: 500; color: #c0392b; white-space: nowrap; }
 
     /* Filters */
-    .filters { padding: 0 24px 10px; display: flex; align-items: center; gap: 6px; }
+    .filters { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .search-box {
       border: 0.5px solid rgba(0,0,0,0.15); border-radius: 8px;
       padding: 4px 10px; font-size: 11px; color: #666;
@@ -80,7 +80,7 @@
     .filter-pill.right { margin-left: auto; }
 
     /* Table */
-    .table-wrap { padding: 0 24px 24px; }
+    .table-wrap { padding: 0 clamp(12px, 2.5vw, 24px) 24px; overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed; }
     colgroup col:nth-child(1)  { width: 24px; }
     colgroup col:nth-child(2)  { width: 120px; }

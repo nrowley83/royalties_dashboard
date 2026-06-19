@@ -81,21 +81,21 @@
 
     /* Table */
     .table-wrap { padding: 0 clamp(12px, 2.5vw, 24px) 24px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed; }
-    colgroup col:nth-child(1)  { width: 24px; }
-    colgroup col:nth-child(2)  { width: 120px; }
-    colgroup col:nth-child(3)  { width: 140px; }
-    colgroup col:nth-child(4)  { width: 50px; }
-    colgroup col:nth-child(5)  { width: 36px; }
-    colgroup col:nth-child(6)  { width: 72px; }
-    colgroup col:nth-child(7)  { width: 72px; }
-    colgroup col:nth-child(8)  { width: 95px; }
-    colgroup col:nth-child(9)  { width: 85px; }
-    colgroup col:nth-child(10) { width: 95px; }
-    colgroup col:nth-child(11) { width: 105px; }
-    colgroup col:nth-child(12) { width: 105px; }
-    colgroup col:nth-child(13) { width: 62px; }
-    colgroup col:nth-child(14) { width: 95px; }
+    table { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: auto; }
+    /* checkbox */ td:nth-child(1), th:nth-child(1) { width: 24px; }
+    /* SVN ID */   td:nth-child(2), th:nth-child(2) { min-width: 130px; }
+    /* Deal Name */td:nth-child(3), th:nth-child(3) { min-width: 140px; width: 18%; }
+    /* Voucher */  td:nth-child(4), th:nth-child(4) { min-width: 60px; }
+    /* Avatar */   td:nth-child(5), th:nth-child(5) { width: 32px; }
+    /* Status */   td:nth-child(6), th:nth-child(6) { min-width: 80px; }
+    /* Closed */   td:nth-child(7), th:nth-child(7) { min-width: 80px; }
+    /* Comm Paid */td:nth-child(8), th:nth-child(8) { min-width: 100px; }
+    /* Roy Filed */ td:nth-child(9), th:nth-child(9) { min-width: 90px; }
+    /* Roy Recv */ td:nth-child(10),th:nth-child(10){ min-width: 100px; }
+    /* Txn Val */  td:nth-child(11),th:nth-child(11){ min-width: 110px; text-align: right; }
+    /* Gross Com */td:nth-child(12),th:nth-child(12){ min-width: 110px; text-align: right; }
+    /* Royalties */td:nth-child(13),th:nth-child(13){ min-width: 70px; text-align: right; }
+    /* Paid via */ td:nth-child(14),th:nth-child(14){ min-width: 90px; }
 
     th { padding: 6px 4px; text-align: left; font-weight: 500; color: #666; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
     td { padding: 8px 4px; border-bottom: 0.5px solid rgba(0,0,0,0.08); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

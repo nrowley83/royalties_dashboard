@@ -37,7 +37,7 @@
 
     /* Dashboard */
     .dashboard { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; flex-direction: column; gap: 6px; }
-    .dash-row { display: flex; gap: clamp(4px, 0.5vw, 6px); align-items: stretch; flex-wrap: wrap; }
+    .dash-row { display: flex; gap: clamp(4px, 0.5vw, 6px); align-items: stretch; width: 100%; }
 
     .stat-card {
       background: #f1efe8;
@@ -46,6 +46,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex: 1;
+      min-width: 0;
     }
     .stat-label {
       font-size: 9px; color: #888; margin-bottom: 3px;
@@ -55,10 +57,10 @@
     .stat-val { font-size: 15px; font-weight: 500; color: #111; white-space: nowrap; }
     .divider { width: 0.5px; background: rgba(0,0,0,0.12); align-self: stretch; flex-shrink: 0; }
 
-    .w-gci { width: 80px; flex-shrink: 0; }
-    .w-pct-gci { width: 48px; flex-shrink: 0; }
-    .w-lst { width: 70px; flex-shrink: 0; }
-    .w-pct-lst { width: 44px; flex-shrink: 0; }
+    .w-gci { flex: 1; min-width: 0; }
+    .w-pct-gci { flex-shrink: 0; }
+    .w-lst { flex: 1; min-width: 0; }
+    .w-pct-lst { flex-shrink: 0; }
 
     .pct-neg { font-size: 13px; font-weight: 500; color: #c0392b; white-space: nowrap; }
 

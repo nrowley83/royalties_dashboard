@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royalties Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9f9f7; color: #111; font-size: 14px; }
+
+    /* Tooltip */
+    .tt { position: relative; display: inline-flex; align-items: center; }
+    .tt .tip {
+      display: none; position: absolute; bottom: calc(100% + 6px); left: 50%;
+      transform: translateX(-50%); background: #1a2340; color: white;
+      font-size: 11px; padding: 5px 8px; border-radius: 5px;
+      white-space: nowrap; z-index: 100; pointer-events: none;
+    }
+    .tt:hover .tip { display: block; }
+
+    /* Nav */
+    .nav { background: #1a2340; padding: 0 20px; display: flex; align-items: center; gap: 24px; height: 44px; }
+    .nav-brand { color: white; font-size: 15px; font-weight: 500; }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-link { color: #8b9dc0; font-size: 12px; padding: 4px 10px; cursor: pointer; text-decoration: none; }
+    .nav-link:hover { color: white; }
+    .nav-user { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .nav-avatar { width: 22px; height: 22px; border-radius: 50%; background: #4a5568; }
+
+    /* Page header */
+    .page-header { padding: 12px 24px 8px; display: flex; align-items: center; justify-content: space-between; }
+    .page-title { font-size: 18px; font-weight: 500; }
+    .page-subtitle { font-size: 11px; color: #888; margin-top: 2px; }
+    .legacy-link { font-size: 10px; color: #888; text-decoration: none; }
+    .legacy-link:hover { color: #555; }
+
+    /* Dashboard */
+    .dashboard { padding: 0 24px 10px; display: flex; flex-direction: column; gap: 6px; }
+    .dash-row { display: flex; gap: 6px; align-items: stretch; }
+
+    .stat-card {
+      background: #f1efe8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stat-label {
+      font-size: 9px; color: #888; margin-bottom: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      white-space: nowrap; display: flex; align-items: center; gap: 3px;
+    }
+    .stat-val { font-size: 15px; font-weight: 500; color: #111; white-space: nowrap; }
+    .divider { width: 0.5px; background: rgba(0,0,0,0.12); align-self: stretch; flex-shrink: 0; }
+
+    .w-gci { width: 80px; flex-shrink: 0; }
+    .w-pct-gci { width: 48px; flex-shrink: 0; }
+    .w-lst { width: 70px; flex-shrink: 0; }
+    .w-pct-lst { width: 44px; flex-shrink: 0; }
+
+    .pct-neg { font-size: 13px; font-weight: 500; color: #c0392b; white-space: nowrap; }
+
+    /* Filters */
+    .filters { padding: 0 24px 10px; display: flex; align-items: center; gap: 6px; }
+    .search-box {
+      border: 0.5px solid rgba(0,0,0,0.15); border-radius: 8px;
+      padding: 4px 10px; font-size: 11px; color: #666;
+      display: flex; align-items: center; gap: 5px; width: 185px;
+      background: white;
+    }
+    .filter-pill {
+      border: 0.5px solid rgba(0,0,0,0.15); border-radius: 8px;
+      padding: 4px 9px; font-size: 11px; color: #666;
+      display: flex; align-items: center; gap: 3px;
+      cursor: pointer; white-space: nowrap; background: white;
+    }
+    .filter-pill:hover { background: #f1efe8; }
+    .filter-pill.right { margin-left: auto; }
+
+    /* Table */
+    .table-wrap { padding: 0 24px 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed; }
+    colgroup col:nth-child(1)  { width: 24px; }
+    colgroup col:nth-child(2)  { width: 120px; }
+    colgroup col:nth-child(3)  { width: 140px; }
+    colgroup col:nth-child(4)  { width: 50px; }
+    colgroup col:nth-child(5)  { width: 36px; }
+    colgroup col:nth-child(6)  { width: 72px; }
+    colgroup col:nth-child(7)  { width: 72px; }
+    colgroup col:nth-child(8)  { width: 95px; }
+    colgroup col:nth-child(9)  { width: 85px; }
+    colgroup col:nth-child(10) { width: 95px; }
+    colgroup col:nth-child(11) { width: 105px; }
+    colgroup col:nth-child(12) { width: 105px; }
+    colgroup col:nth-child(13) { width: 62px; }
+    colgroup col:nth-child(14) { width: 95px; }
+
+    th { padding: 6px 4px; text-align: left; font-weight: 500; color: #666; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
+    td { padding: 8px 4px; border-bottom: 0.5px solid rgba(0,0,0,0.08); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    tr:last-child td { border-bottom: none; }
+    .totals-row td { background: #f1efe8; font-weight: 500; padding: 5px 4px; }
+    .link { color: #2563eb; }
+    .badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 500; }
+    .badge-overdue { background: #e53e3e; color: white; }
+    .badge-received { background: #38a169; color: white; }
+    .overdue-date { color: #e53e3e; }
+    .muted { color: #888; }
+    .avatar { width: 20px; height: 20px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="nav-brand">buildout</span>
+    <div class="nav-links">
+      <a class="nav-link" href="#">CRM</a>
+      <a class="nav-link" href="#">Deals</a>
+      <a class="nav-link" href="#">Showcase</a>
+      <a class="nav-link" href="#">Back Office</a>
+      <a class="nav-link" href="#">Reports</a>
+    </div>
+    <div class="nav-user">
+      <div class="nav-avatar"></div>
+      <span style="color: #8b9dc0; font-size: 12px;">Jay Sedgwick</span>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div>
+      <div class="page-title">Royalties</div>
+      <div class="page-subtitle">Manage SVN royalties for your closed deals</div>
+    </div>
+    <a href="#" class="legacy-link">Legacy View</a>
+  </div>
+
+  <div class="dashboard">
+    <div class="dash-row">
+      <div class="stat-card">
+        <div class="w-gci">
+          <div class="stat-label">GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale and Lease</span></span></div>
+          <div class="stat-val">$4.2M</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-gci">
+          <div class="stat-label">GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale and Lease</span></span></div>
+          <div class="stat-val">$2.1M</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-pct-gci"><div class="pct-neg">−50.0%</div></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="w-lst">
+          <div class="stat-label">Listings LY</div>
+          <div class="stat-val">214</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-lst">
+          <div class="stat-label">Listings YTD</div>
+          <div class="stat-val">97</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-pct-lst"><div class="pct-neg">−54.7%</div></div>
+      </div>
+
+      <div class="stat-card" style="padding: 8px 14px;">
+        <div style="text-align:center;">
+          <div class="stat-label" style="justify-content:center;">Advisors</div>
+          <div class="stat-val">38</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-row">
+      <div class="stat-card">
+        <div class="w-gci">
+          <div class="stat-label">Total GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
+          <div class="stat-val">$5.1M</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-gci">
+          <div class="stat-label">Total GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
+          <div class="stat-val">$2.6M</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-pct-gci"><div class="pct-neg">−49.0%</div></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="w-lst">
+          <div class="stat-label">Deals LY</div>
+          <div class="stat-val">197</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-lst">
+          <div class="stat-label">Deals YTD</div>
+          <div class="stat-val">80</div>
+        </div>
+        <div class="divider"></div>
+        <div class="w-pct-lst"><div class="pct-neg">−59.4%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="search-box">
+      <i class="ti ti-search" style="font-size:12px;" aria-hidden="true"></i> Search by ID, name, or amount
+    </div>
+    <div class="filter-pill">Status <i class="ti ti-chevron-down" style="font-size:11px;" aria-hidden="true"></i></div>
+    <div class="filter-pill">Deal Type <i class="ti ti-chevron-down" style="font-size:11px;" aria-hidden="true"></i></div>
+    <div class="filter-pill">Date Range <i class="ti ti-chevron-down" style="font-size:11px;" aria-hidden="true"></i></div>
+    <div class="filter-pill">Paid via Buildout <i class="ti ti-chevron-down" style="font-size:11px;" aria-hidden="true"></i></div>
+    <div class="filter-pill right">Bulk Actions <i class="ti ti-chevron-down" style="font-size:11px;" aria-hidden="true"></i></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <colgroup><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup>
+      <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>SVN ID</th>
+          <th>SVN Deal Name</th>
+          <th>Voucher</th>
+          <th></th>
+          <th>Royalty Status</th>
+          <th>Closed</th>
+          <th>Commission Paid</th>
+          <th>Royalty Filed</th>
+          <th>Royalty Received</th>
+          <th>Transaction Value</th>
+          <th>Gross Commission</th>
+          <th>Royalties</th>
+          <th>Paid via Buildout</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="totals-row">
+          <td></td>
+          <td colspan="9">TOTALS</td>
+          <td>$25,508,674.02</td>
+          <td>$896,510.10</td>
+          <td>$62,755.71</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td class="link">D 61 014-S > C 110 496</td>
+          <td class="link">Ann Test Deal (123 Test Deal St)</td>
+          <td class="link">115690</td>
+          <td><span class="avatar" style="background:#c4a882;"></span></td>
+          <td><span class="badge badge-overdue">Overdue</span></td>
+          <td class="muted">Sold 05/15/2026</td>
+          <td class="muted">Paid 05/19/2026</td>
+          <td class="overdue-date">File by 06/02/2026</td>
+          <td class="muted">--</td>
+          <td>$500,000.00</td>
+          <td>$7,500.00</td>
+          <td>$525.00</td>
+          <td class="muted">--</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td class="link">D 61 013-S > C 110 495</td>
+          <td class="link">Jane Leasing 12/20 (4455 Cot...)</td>
+          <td class="link">95238</td>
+          <td><span class="avatar" style="background:#68a86a;"></span></td>
+          <td><span class="badge badge-overdue">Overdue</span></td>
+          <td class="muted">Sold 04/20/2026</td>
+          <td class="muted">Paid 04/24/2026</td>
+          <td class="overdue-date">File by 05/08/2026</td>
+          <td class="muted">--</td>
+          <td>$10,000.00</td>
+          <td>$1,000.00</td>
+          <td>$70.00</td>
+          <td class="muted">--</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td class="link">D 61 013-S > C 110 494</td>
+          <td class="link">Jane Leasing 12/20 (4455 Cot...)</td>
+          <td class="link">95238</td>
+          <td><span class="avatar" style="background:#68a86a;"></span></td>
+          <td><span class="badge badge-overdue">Overdue</span></td>
+          <td class="muted">Sold 04/20/2026</td>
+          <td class="muted">Paid 04/24/2026</td>
+          <td class="overdue-date">File by 05/08/2026</td>
+          <td class="muted">--</td>
+          <td>$10,000.00</td>
+          <td>$1,000.00</td>
+          <td>$70.00</td>
+          <td class="muted">--</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td class="link">D 61 011-S > C 110 493</td>
+          <td class="link">4455 Cotesworth Ave</td>
+          <td class="link">95236</td>
+          <td><span class="avatar" style="background:#68a86a;"></span></td>
+          <td><span class="badge badge-overdue">Overdue</span></td>
+          <td class="muted">Pending Cancelled</td>
+          <td class="muted">Paid 04/03/2026</td>
+          <td class="overdue-date">File by 04/17/2026</td>
+          <td class="muted">--</td>
+          <td>$1,300,000.00</td>
+          <td>$1,000.00</td>
+          <td>$2,065.00</td>
+          <td class="muted">--</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td class="link">D 61 012-T > C 110 492</td>
+          <td class="muted">--</td>
+          <td class="muted">--</td>
+          <td><span class="avatar" style="background:#c4a882;"></span></td>
+          <td><span class="badge badge-received">Received</span></td>
+          <td class="muted">Closed --</td>
+          <td class="muted">Paid 04/01/2026</td>
+          <td class="muted">Filed 04/01/2026</td>
+          <td class="muted">Received 04/01/2026</td>
+          <td>$1,000.00</td>
+          <td>$1,000.00</td>
+          <td>$70.00</td>
+          <td class="muted">--</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

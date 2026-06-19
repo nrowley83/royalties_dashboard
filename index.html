@@ -37,17 +37,27 @@
 
     /* Dashboard */
     .dashboard { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; flex-direction: column; gap: 6px; }
-    .dash-row { display: flex; gap: clamp(4px, 0.5vw, 6px); align-items: stretch; width: 100%; }
 
-    .stat-card {
+    .stat-band {
       background: #f1efe8;
       border-radius: 8px;
-      padding: 8px 12px;
       display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: stretch;
+      width: 100%;
+    }
+    .stat-section {
       flex: 1;
-      min-width: 0;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 0.5px solid rgba(0,0,0,0.12);
+    }
+    .stat-section:last-child { border-right: none; }
+    .stat-section.pct-section {
+      flex: 0 0 80px;
+      align-items: center;
+      justify-content: center;
     }
     .stat-label {
       font-size: 9px; color: #888; margin-bottom: 3px;
@@ -55,13 +65,6 @@
       white-space: nowrap; display: flex; align-items: center; gap: 3px;
     }
     .stat-val { font-size: 15px; font-weight: 500; color: #111; white-space: nowrap; }
-    .divider { width: 0.5px; background: rgba(0,0,0,0.12); align-self: stretch; flex-shrink: 0; }
-
-    .w-gci { flex: 2; min-width: 80px; }
-    .w-pct-gci { flex: 1; min-width: 48px; text-align: center; }
-    .w-lst { flex: 2; min-width: 70px; }
-    .w-pct-lst { flex: 1; min-width: 44px; text-align: center; }
-
     .pct-neg { font-size: 13px; font-weight: 500; color: #c0392b; white-space: nowrap; }
 
     /* Filters */
@@ -138,70 +141,57 @@
   </div>
 
   <div class="dashboard">
-    <div class="dash-row">
-      <div class="stat-card">
-        <div class="w-gci">
-          <div class="stat-label">GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale and Lease</span></span></div>
-          <div class="stat-val">$4.2M</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-gci">
-          <div class="stat-label">GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale and Lease</span></span></div>
-          <div class="stat-val">$2.1M</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-pct-gci"><div class="pct-neg">−50.0%</div></div>
+    <div class="stat-band">
+      <div class="stat-section">
+        <div class="stat-label">GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale and Lease</span></span></div>
+        <div class="stat-val">$4.2M</div>
       </div>
-
-      <div class="stat-card">
-        <div class="w-lst">
-          <div class="stat-label">Listings LY</div>
-          <div class="stat-val">214</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-lst">
-          <div class="stat-label">Listings YTD</div>
-          <div class="stat-val">97</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-pct-lst"><div class="pct-neg">−54.7%</div></div>
+      <div class="stat-section">
+        <div class="stat-label">GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale and Lease</span></span></div>
+        <div class="stat-val">$2.1M</div>
       </div>
-
-      <div class="stat-card" style="padding: 8px 14px;">
-        <div style="text-align:center;">
-          <div class="stat-label" style="justify-content:center;">Advisors</div>
-          <div class="stat-val">38</div>
-        </div>
+      <div class="stat-section pct-section">
+        <div class="pct-neg">−50.0%</div>
+      </div>
+      <div class="stat-section">
+        <div class="stat-label">Listings LY</div>
+        <div class="stat-val">214</div>
+      </div>
+      <div class="stat-section">
+        <div class="stat-label">Listings YTD</div>
+        <div class="stat-val">97</div>
+      </div>
+      <div class="stat-section pct-section">
+        <div class="pct-neg">−54.7%</div>
+      </div>
+      <div class="stat-section">
+        <div class="stat-label">Advisors</div>
+        <div class="stat-val">38</div>
       </div>
     </div>
 
-    <div class="dash-row">
-      <div class="stat-card">
-        <div class="w-gci">
-          <div class="stat-label">Total GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
-          <div class="stat-val">$5.1M</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-gci">
-          <div class="stat-label">Total GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;" aria-hidden="true"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
-          <div class="stat-val">$2.6M</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-pct-gci"><div class="pct-neg">−49.0%</div></div>
+    <div class="stat-band">
+      <div class="stat-section">
+        <div class="stat-label">Total GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
+        <div class="stat-val">$5.1M</div>
       </div>
-
-      <div class="stat-card">
-        <div class="w-lst">
-          <div class="stat-label">Deals LY</div>
-          <div class="stat-val">197</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-lst">
-          <div class="stat-label">Deals YTD</div>
-          <div class="stat-val">80</div>
-        </div>
-        <div class="divider"></div>
-        <div class="w-pct-lst"><div class="pct-neg">−59.4%</div></div>
+      <div class="stat-section">
+        <div class="stat-label">Total GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
+        <div class="stat-val">$2.6M</div>
+      </div>
+      <div class="stat-section pct-section">
+        <div class="pct-neg">−49.0%</div>
+      </div>
+      <div class="stat-section">
+        <div class="stat-label">Deals LY</div>
+        <div class="stat-val">197</div>
+      </div>
+      <div class="stat-section">
+        <div class="stat-label">Deals YTD</div>
+        <div class="stat-val">80</div>
+      </div>
+      <div class="stat-section pct-section">
+        <div class="pct-neg">−59.4%</div>
       </div>
     </div>
   </div>

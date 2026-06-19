@@ -50,9 +50,8 @@
       min-width: 0;
     }
     .stat-card-label {
-      font-size: 10px; color: #888;
-      text-transform: uppercase; letter-spacing: 0.05em;
-      white-space: nowrap;
+      font-size: 13px; font-weight: 500; color: #444;
+      white-space: nowrap; display: flex; align-items: center; gap: 5px;
     }
     .stat-card-val {
       font-size: clamp(20px, 2.5vw, 28px);
@@ -138,13 +137,13 @@
 
   <div class="dashboard">
     <div class="stat-card">
-      <div class="stat-card-label">GCI YTD</div>
+      <div class="stat-card-label">GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:13px;color:#aaa;"></i><span class="tip">Includes Sale and Lease</span></span></div>
       <div class="stat-card-val">$2.1M</div>
       <div class="stat-card-ly">vs $4.2M last year</div>
       <div class="stat-card-pct">−50.0%</div>
     </div>
     <div class="stat-card">
-      <div class="stat-card-label">Total GCI YTD</div>
+      <div class="stat-card-label">Total GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:13px;color:#aaa;"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
       <div class="stat-card-val">$2.6M</div>
       <div class="stat-card-ly">vs $5.1M last year</div>
       <div class="stat-card-pct">−49.0%</div>

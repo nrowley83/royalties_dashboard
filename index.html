@@ -36,36 +36,32 @@
     .legacy-link:hover { color: #555; }
 
     /* Dashboard */
-    .dashboard { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; flex-direction: column; gap: 6px; }
+    .dashboard { padding: 0 clamp(12px, 2.5vw, 24px) 12px; display: flex; gap: clamp(6px, 1vw, 12px); }
 
-    .stat-band {
-      background: #f1efe8;
-      border-radius: 8px;
-      display: flex;
-      align-items: stretch;
-      width: 100%;
-    }
-    .stat-section {
+    .stat-card {
       flex: 1;
-      padding: 10px 16px;
+      background: #f1efe8;
+      border-radius: 10px;
+      padding: clamp(12px, 1.5vw, 20px) clamp(14px, 1.8vw, 24px);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-right: 0.5px solid rgba(0,0,0,0.12);
+      gap: 4px;
+      min-width: 0;
     }
-    .stat-section:last-child { border-right: none; }
-    .stat-section.pct-section {
-      flex: 0 0 80px;
-      align-items: center;
-      justify-content: center;
+    .stat-card-label {
+      font-size: 10px; color: #888;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      white-space: nowrap;
     }
-    .stat-label {
-      font-size: 9px; color: #888; margin-bottom: 3px;
-      text-transform: uppercase; letter-spacing: 0.04em;
-      white-space: nowrap; display: flex; align-items: center; gap: 3px;
+    .stat-card-val {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 600; color: #111; white-space: nowrap; line-height: 1.1;
     }
-    .stat-val { font-size: 15px; font-weight: 500; color: #111; white-space: nowrap; }
-    .pct-neg { font-size: 13px; font-weight: 500; color: #c0392b; white-space: nowrap; }
+    .stat-card-ly {
+      font-size: 11px; color: #888; white-space: nowrap; margin-top: 2px;
+    }
+    .stat-card-pct { font-size: 12px; font-weight: 500; color: #c0392b; }
 
     /* Filters */
     .filters { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -141,58 +137,29 @@
   </div>
 
   <div class="dashboard">
-    <div class="stat-band">
-      <div class="stat-section">
-        <div class="stat-label">GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale and Lease</span></span></div>
-        <div class="stat-val">$4.2M</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale and Lease</span></span></div>
-        <div class="stat-val">$2.1M</div>
-      </div>
-      <div class="stat-section pct-section">
-        <div class="pct-neg">−50.0%</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">Listings LY</div>
-        <div class="stat-val">214</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">Listings YTD</div>
-        <div class="stat-val">97</div>
-      </div>
-      <div class="stat-section pct-section">
-        <div class="pct-neg">−54.7%</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">Advisors</div>
-        <div class="stat-val">38</div>
-      </div>
+    <div class="stat-card">
+      <div class="stat-card-label">GCI YTD</div>
+      <div class="stat-card-val">$2.1M</div>
+      <div class="stat-card-ly">vs $4.2M last year</div>
+      <div class="stat-card-pct">−50.0%</div>
     </div>
-
-    <div class="stat-band">
-      <div class="stat-section">
-        <div class="stat-label">Total GCI LY <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
-        <div class="stat-val">$5.1M</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">Total GCI YTD <span class="tt"><i class="ti ti-info-circle" style="font-size:11px;color:#888;"></i><span class="tip">Includes Sale, Lease, Auction, Property Management, and Other</span></span></div>
-        <div class="stat-val">$2.6M</div>
-      </div>
-      <div class="stat-section pct-section">
-        <div class="pct-neg">−49.0%</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">Deals LY</div>
-        <div class="stat-val">197</div>
-      </div>
-      <div class="stat-section">
-        <div class="stat-label">Deals YTD</div>
-        <div class="stat-val">80</div>
-      </div>
-      <div class="stat-section pct-section">
-        <div class="pct-neg">−59.4%</div>
-      </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Total GCI YTD</div>
+      <div class="stat-card-val">$2.6M</div>
+      <div class="stat-card-ly">vs $5.1M last year</div>
+      <div class="stat-card-pct">−49.0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Listings YTD</div>
+      <div class="stat-card-val">97</div>
+      <div class="stat-card-ly">vs 214 last year</div>
+      <div class="stat-card-pct">−54.7%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Deals YTD</div>
+      <div class="stat-card-val">80</div>
+      <div class="stat-card-ly">vs 197 last year</div>
+      <div class="stat-card-pct">−59.4%</div>
     </div>
   </div>
 

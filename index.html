@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9f9f7; color: #111; font-size: 14px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #111; font-size: 14px; }
 
     /* Tooltip */
     .tt { position: relative; display: inline-flex; align-items: center; }
@@ -20,29 +20,30 @@
     .tt:hover .tip { display: block; }
 
     /* Nav */
-    .nav { background: #1a2340; padding: 0 clamp(12px, 2vw, 24px); display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); height: 44px; }
-    .nav-brand { color: white; font-size: 15px; font-weight: 500; }
-    .nav-links { display: flex; gap: 4px; }
-    .nav-link { color: #8b9dc0; font-size: 12px; padding: 4px 10px; cursor: pointer; text-decoration: none; }
+    .nav { background: #1a2340; padding: 0 clamp(12px, 2vw, 24px); display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); height: 48px; }
+    .nav-brand { color: white; font-size: 15px; font-weight: 600; }
+    .nav-links { display: flex; gap: 2px; }
+    .nav-link { color: #8b9dc0; font-size: 12px; padding: 4px 10px; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 4px; }
     .nav-link:hover { color: white; }
-    .nav-user { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-    .nav-avatar { width: 22px; height: 22px; border-radius: 50%; background: #4a5568; }
+    .nav-user { margin-left: auto; display: flex; align-items: center; gap: 8px; color: #8b9dc0; font-size: 12px; }
+    .nav-avatar { width: 28px; height: 28px; border-radius: 50%; background: #4a5568; border: 2px solid #3a4a68; }
 
     /* Page header */
-    .page-header { padding: 12px clamp(12px, 2.5vw, 24px) 8px; display: flex; align-items: center; justify-content: space-between; }
-    .page-title { font-size: clamp(15px, 2vw, 18px); font-weight: 500; }
-    .page-subtitle { font-size: 11px; color: #888; margin-top: 2px; }
-    .legacy-link { font-size: 10px; color: #888; text-decoration: none; }
-    .legacy-link:hover { color: #555; }
+    .page-header { padding: 20px clamp(12px, 2.5vw, 24px) 16px; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid #f0f0f0; }
+    .page-title { font-size: 20px; font-weight: 600; color: #111; }
+    .page-subtitle { font-size: 12px; color: #999; margin-top: 3px; }
+    .legacy-link { font-size: 13px; color: #2563eb; text-decoration: none; margin-top: 4px; }
+    .legacy-link:hover { text-decoration: underline; }
 
     /* Dashboard */
-    .dashboard { padding: 0 clamp(12px, 2.5vw, 24px) 12px; display: flex; gap: clamp(6px, 1vw, 12px); }
+    .dashboard { padding: 16px clamp(12px, 2.5vw, 24px) 16px; display: flex; gap: clamp(6px, 1vw, 12px); border-bottom: 1px solid #f0f0f0; }
 
     .stat-card {
       flex: 1;
-      background: #f1efe8;
-      border-radius: 10px;
-      padding: clamp(12px, 1.5vw, 20px) clamp(14px, 1.8vw, 24px);
+      background: #f7f7f5;
+      border-radius: 8px;
+      border: 1px solid #ebebeb;
+      padding: clamp(12px, 1.5vw, 18px) clamp(14px, 1.8vw, 20px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -50,64 +51,67 @@
       min-width: 0;
     }
     .stat-card-label {
-      font-size: 13px; font-weight: 500; color: #444;
+      font-size: 12px; font-weight: 500; color: #666;
       white-space: nowrap; display: flex; align-items: center; gap: 5px;
     }
     .stat-card-val {
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 600; color: #111; white-space: nowrap; line-height: 1.1;
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700; color: #111; white-space: nowrap; line-height: 1.1;
     }
     .stat-card-ly {
-      font-size: 11px; color: #888; white-space: nowrap; margin-top: 2px;
+      font-size: 11px; color: #999; white-space: nowrap; margin-top: 3px;
     }
-    .stat-card-pct { font-size: 12px; font-weight: 500; color: #c0392b; }
+    .stat-card-pct { font-size: 12px; font-weight: 600; color: #c0392b; }
 
     /* Filters */
-    .filters { padding: 0 clamp(12px, 2.5vw, 24px) 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .filters { padding: 12px clamp(12px, 2.5vw, 24px); display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f0f0f0; }
     .search-box {
-      border: 0.5px solid rgba(0,0,0,0.15); border-radius: 8px;
-      padding: 4px 10px; font-size: 11px; color: #666;
-      display: flex; align-items: center; gap: 5px; width: 185px;
+      border: 1px solid #e0e0e0; border-radius: 6px;
+      padding: 6px 12px; font-size: 12px; color: #666;
+      display: flex; align-items: center; gap: 6px; width: 200px;
       background: white;
     }
     .filter-pill {
-      border: 0.5px solid rgba(0,0,0,0.15); border-radius: 8px;
-      padding: 4px 9px; font-size: 11px; color: #666;
-      display: flex; align-items: center; gap: 3px;
+      border: 1px solid #e0e0e0; border-radius: 6px;
+      padding: 6px 10px; font-size: 12px; color: #444;
+      display: flex; align-items: center; gap: 4px;
       cursor: pointer; white-space: nowrap; background: white;
     }
-    .filter-pill:hover { background: #f1efe8; }
+    .filter-pill:hover { background: #f7f7f5; border-color: #ccc; }
     .filter-pill.right { margin-left: auto; }
 
     /* Table */
     .table-wrap { padding: 0 clamp(12px, 2.5vw, 24px) 24px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: auto; }
-    /* checkbox */ td:nth-child(1), th:nth-child(1) { width: 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; table-layout: auto; }
+    /* checkbox */ td:nth-child(1), th:nth-child(1) { width: 32px; }
     /* SVN ID */   td:nth-child(2), th:nth-child(2) { min-width: 130px; }
-    /* Deal Name */td:nth-child(3), th:nth-child(3) { min-width: 140px; width: 18%; }
+    /* Deal Name */td:nth-child(3), th:nth-child(3) { min-width: 160px; width: 18%; }
     /* Voucher */  td:nth-child(4), th:nth-child(4) { min-width: 60px; }
-    /* Avatar */   td:nth-child(5), th:nth-child(5) { width: 32px; }
-    /* Status */   td:nth-child(6), th:nth-child(6) { min-width: 80px; }
-    /* Closed */   td:nth-child(7), th:nth-child(7) { min-width: 80px; }
-    /* Comm Paid */td:nth-child(8), th:nth-child(8) { min-width: 100px; }
-    /* Roy Filed */ td:nth-child(9), th:nth-child(9) { min-width: 90px; }
-    /* Roy Recv */ td:nth-child(10),th:nth-child(10){ min-width: 100px; }
-    /* Txn Val */  td:nth-child(11),th:nth-child(11){ min-width: 110px; text-align: right; }
-    /* Gross Com */td:nth-child(12),th:nth-child(12){ min-width: 110px; text-align: right; }
-    /* Royalties */td:nth-child(13),th:nth-child(13){ min-width: 70px; text-align: right; }
-    /* Paid via */ td:nth-child(14),th:nth-child(14){ min-width: 90px; }
+    /* Avatar */   td:nth-child(5), th:nth-child(5) { width: 36px; }
+    /* Status */   td:nth-child(6), th:nth-child(6) { min-width: 90px; }
+    /* Closed */   td:nth-child(7), th:nth-child(7) { min-width: 90px; }
+    /* Comm Paid */td:nth-child(8), th:nth-child(8) { min-width: 110px; }
+    /* Roy Filed */ td:nth-child(9), th:nth-child(9) { min-width: 100px; }
+    /* Roy Recv */ td:nth-child(10),th:nth-child(10){ min-width: 110px; }
+    /* Txn Val */  td:nth-child(11),th:nth-child(11){ min-width: 120px; text-align: right; }
+    /* Gross Com */td:nth-child(12),th:nth-child(12){ min-width: 120px; text-align: right; }
+    /* Royalties */td:nth-child(13),th:nth-child(13){ min-width: 80px; text-align: right; }
+    /* Paid via */ td:nth-child(14),th:nth-child(14){ min-width: 100px; }
 
-    th { padding: 6px 4px; text-align: left; font-weight: 500; color: #666; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
-    td { padding: 8px 4px; border-bottom: 0.5px solid rgba(0,0,0,0.08); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    th { padding: 10px 8px; text-align: left; font-weight: 500; font-size: 12px; color: #555; border-bottom: 1px solid #ebebeb; white-space: nowrap; }
+    td { padding: 14px 8px; border-bottom: 1px solid #f3f3f3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: #222; vertical-align: middle; }
+    tr:hover td { background: #fafafa; }
     tr:last-child td { border-bottom: none; }
-    .totals-row td { background: #f1efe8; font-weight: 500; padding: 5px 4px; }
+    .totals-row td { background: #f7f7f5; font-weight: 600; padding: 10px 8px; color: #111; border-bottom: 1px solid #ebebeb; }
     .link { color: #2563eb; }
-    .badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 500; }
+    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
     .badge-overdue { background: #e53e3e; color: white; }
     .badge-received { background: #38a169; color: white; }
     .overdue-date { color: #e53e3e; }
-    .muted { color: #888; }
-    .avatar { width: 20px; height: 20px; border-radius: 50%; display: inline-block; }
+    .muted { color: #aaa; }
+    .avatar { width: 28px; height: 28px; border-radius: 50%; display: inline-block; }
+    .cell-two-line { white-space: normal; line-height: 1.4; }
+    .cell-sub { font-size: 11px; color: #999; }
   </style>
 </head>
 <body>
@@ -216,9 +220,9 @@
           <td class="link">115690</td>
           <td><span class="avatar" style="background:#c4a882;"></span></td>
           <td><span class="badge badge-overdue">Overdue</span></td>
-          <td class="muted">Sold 05/15/2026</td>
-          <td class="muted">Paid 05/19/2026</td>
-          <td class="overdue-date">File by 06/02/2026</td>
+          <td class="cell-two-line">Sold<br><span class="cell-sub">05/15/2026</span></td>
+          <td class="cell-two-line">Commission paid<br><span class="cell-sub">05/19/2026</span></td>
+          <td class="cell-two-line overdue-date">File by<br>06/02/2026</td>
           <td class="muted">--</td>
           <td>$500,000.00</td>
           <td>$7,500.00</td>
@@ -232,9 +236,9 @@
           <td class="link">95238</td>
           <td><span class="avatar" style="background:#68a86a;"></span></td>
           <td><span class="badge badge-overdue">Overdue</span></td>
-          <td class="muted">Sold 04/20/2026</td>
-          <td class="muted">Paid 04/24/2026</td>
-          <td class="overdue-date">File by 05/08/2026</td>
+          <td class="cell-two-line">Sold<br><span class="cell-sub">04/20/2026</span></td>
+          <td class="cell-two-line">Commission paid<br><span class="cell-sub">04/24/2026</span></td>
+          <td class="cell-two-line overdue-date">File by<br>05/08/2026</td>
           <td class="muted">--</td>
           <td>$10,000.00</td>
           <td>$1,000.00</td>
@@ -248,9 +252,9 @@
           <td class="link">95238</td>
           <td><span class="avatar" style="background:#68a86a;"></span></td>
           <td><span class="badge badge-overdue">Overdue</span></td>
-          <td class="muted">Sold 04/20/2026</td>
-          <td class="muted">Paid 04/24/2026</td>
-          <td class="overdue-date">File by 05/08/2026</td>
+          <td class="cell-two-line">Sold<br><span class="cell-sub">04/20/2026</span></td>
+          <td class="cell-two-line">Commission paid<br><span class="cell-sub">04/24/2026</span></td>
+          <td class="cell-two-line overdue-date">File by<br>05/08/2026</td>
           <td class="muted">--</td>
           <td>$10,000.00</td>
           <td>$1,000.00</td>
@@ -264,9 +268,9 @@
           <td class="link">95236</td>
           <td><span class="avatar" style="background:#68a86a;"></span></td>
           <td><span class="badge badge-overdue">Overdue</span></td>
-          <td class="muted">Pending Cancelled</td>
-          <td class="muted">Paid 04/03/2026</td>
-          <td class="overdue-date">File by 04/17/2026</td>
+          <td class="cell-two-line">Pending<br><span class="cell-sub">Cancelled</span></td>
+          <td class="cell-two-line">Commission paid<br><span class="cell-sub">04/03/2026</span></td>
+          <td class="cell-two-line overdue-date">File by<br>04/17/2026</td>
           <td class="muted">--</td>
           <td>$1,300,000.00</td>
           <td>$1,000.00</td>
@@ -280,10 +284,10 @@
           <td class="muted">--</td>
           <td><span class="avatar" style="background:#c4a882;"></span></td>
           <td><span class="badge badge-received">Received</span></td>
-          <td class="muted">Closed --</td>
-          <td class="muted">Paid 04/01/2026</td>
-          <td class="muted">Filed 04/01/2026</td>
-          <td class="muted">Received 04/01/2026</td>
+          <td class="cell-two-line muted">Closed<br><span class="cell-sub">--</span></td>
+          <td class="cell-two-line">Commission paid<br><span class="cell-sub">04/01/2026</span></td>
+          <td class="cell-two-line">Filed on<br><span class="cell-sub">04/01/2026</span></td>
+          <td class="cell-two-line">Received on<br><span class="cell-sub">04/01/2026</span></td>
           <td>$1,000.00</td>
           <td>$1,000.00</td>
           <td>$70.00</td>

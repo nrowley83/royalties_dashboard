@@ -79,6 +79,7 @@ const navItems: NavItem[] = [
     items: [
       { label: "Vouchers", href: "/backoffice/vouchers" },
       { label: "My Receivables", href: "/backoffice/receivables" },
+      { label: "Royalties", href: "/app/royalties-dashboard" },
     ],
   },
   {

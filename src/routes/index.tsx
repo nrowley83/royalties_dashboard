@@ -41,6 +41,18 @@ function Home() {
             </Card>
           </Link>
         </div>
+        <div className="col-md-4">
+          <Link to="/app/royalties-dashboard" className="text-decoration-none">
+            <Card className="shadow-sm h-100">
+              <CardHeader>
+                <CardTitle>Royalties Dashboard</CardTitle>
+              </CardHeader>
+              <CardBody>
+                SVN royalties management — stat cards, filterable table with overdue/received status, and commission tracking.
+              </CardBody>
+            </Card>
+          </Link>
+        </div>
       </div>
     </div>
   );

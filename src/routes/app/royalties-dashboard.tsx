@@ -154,9 +154,6 @@ export default function RoyaltiesDashboard() {
               Manage SVN royalties for your closed deals
             </p>
           </div>
-          <a href="#" className="text-primary small">
-            Legacy View
-          </a>
         </div>
 
         {/* Stat cards */}

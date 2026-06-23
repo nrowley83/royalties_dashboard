@@ -8,6 +8,7 @@ import {
   faCircleInfo,
   faArrowTrendDown,
   faArrowTrendUp,
+  faChevronDown,
 } from "@fortawesome/pro-regular-svg-icons";
 
 export const Route = createFileRoute("/app/royalties-dashboard")({
@@ -145,19 +146,22 @@ function TwoLineCell({
 export default function RoyaltiesDashboard() {
   return (
     <Tooltip.Provider>
-      <div className="p-4">
+      <div>
         {/* Page header */}
-        <div className="d-flex align-items-start justify-content-between mb-3">
+        <div className="d-flex align-items-start justify-content-between px-4 py-3 border-bottom">
           <div>
             <h4 className="mb-1">Royalties</h4>
             <p className="text-muted small mb-0">
               Manage SVN royalties for your closed deals
             </p>
           </div>
+          <a href="#" className="text-primary small d-flex align-items-center gap-1 mt-1">
+            View Deals <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />
+          </a>
         </div>
 
         {/* Stat cards */}
-        <div className="d-flex gap-3 mb-4">
+        <div className="d-flex gap-3 px-4 py-3 border-bottom">
           {statCards.map((card) => (
             <Card key={card.label} className="flex-fill">
               <Card.Body>
@@ -210,31 +214,35 @@ export default function RoyaltiesDashboard() {
         </div>
 
         {/* Filters */}
-        <div className="d-flex align-items-center gap-2 mb-3">
-          <input
-            className="form-control form-control-sm"
-            style={{ maxWidth: 200 }}
-            placeholder="Search by ID, name, or amount"
-          />
-          <button className="btn btn-outline-secondary btn-sm">
-            Status ▾
+        <div className="d-flex align-items-center gap-2 px-4 py-2 border-bottom">
+          <div className="input-group input-group-sm" style={{ maxWidth: 220 }}>
+            <span className="input-group-text bg-white border-end-0">
+              <FontAwesomeIcon icon={faCircleInfo} className="text-muted" style={{ fontSize: 12 }} />
+            </span>
+            <input
+              className="form-control form-control-sm border-start-0"
+              placeholder="Search by ID, name, or amount"
+            />
+          </div>
+          <button className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+            Status <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />
           </button>
-          <button className="btn btn-outline-secondary btn-sm">
-            Deal Type ▾
+          <button className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+            Deal Type <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />
           </button>
-          <button className="btn btn-outline-secondary btn-sm">
-            Date Range ▾
+          <button className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+            Date Range <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />
           </button>
-          <button className="btn btn-outline-secondary btn-sm">
-            Paid via Buildout ▾
+          <button className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+            Paid via Buildout <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />
           </button>
-          <button className="btn btn-outline-secondary btn-sm ms-auto">
-            Bulk Actions ▾
+          <button className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 ms-auto">
+            Bulk Actions <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />
           </button>
         </div>
 
         {/* Table */}
-        <Table responsive>
+        <Table responsive className="px-4">
           <Table.Header>
             <Table.Row>
               <Table.Head style={{ width: 32 }}>
@@ -259,9 +267,9 @@ export default function RoyaltiesDashboard() {
             <Table.Row className="fw-semibold bg-light">
               <Table.Cell />
               <Table.Cell colSpan={8}>TOTALS</Table.Cell>
-              <Table.Cell className="text-end">$25,508,674.02</Table.Cell>
-              <Table.Cell className="text-end">$896,510.10</Table.Cell>
-              <Table.Cell className="text-end">$62,755.71</Table.Cell>
+              <Table.Cell className="text-end">$26,508,674.02</Table.Cell>
+              <Table.Cell className="text-end">$976,510.10</Table.Cell>
+              <Table.Cell className="text-end">$68,355.71</Table.Cell>
               <Table.Cell />
             </Table.Row>
             {rows.map((row) => (

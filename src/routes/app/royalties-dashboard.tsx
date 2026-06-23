@@ -148,7 +148,7 @@ export default function RoyaltiesDashboard() {
     <Tooltip.Provider>
       <div>
         {/* Page header */}
-        <div className="d-flex align-items-start justify-content-between px-4 py-3 border-bottom">
+        <div className="d-flex align-items-start justify-content-between px-4 pt-4 pb-3 border-bottom">
           <div>
             <h4 className="mb-1">Royalties</h4>
             <p className="text-muted small mb-0">
